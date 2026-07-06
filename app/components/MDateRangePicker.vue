@@ -63,7 +63,7 @@ function clearDates(event: MouseEvent) {
       <template #content>
         <ClientOnly>
           <div class="p-3">
-            <Calendar
+            <MCalendar
               :model-value="modelValue"
               range
               :number-of-months="1"

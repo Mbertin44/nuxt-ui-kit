@@ -16,7 +16,7 @@ const socialLinks = [
 
 <template>
   <div>
-    <Header
+    <MHeader
       brand-name="MY BRAND"
       :navigation-items="navigationItems"
       cta-label="Contact"
@@ -24,29 +24,29 @@ const socialLinks = [
     />
 
     <main class="pt-(--ui-header-height) max-w-3xl mx-auto p-8 space-y-16">
-      <RevealSection slide-from="bottom">
+      <MRevealSection slide-from="bottom">
         <h1 class="text-3xl">nuxt-ui-kit playground</h1>
         <p class="text-muted mt-2">
           This page exists only to preview the kit's shared components during
           local development. It is not part of what a consuming project
           inherits.
         </p>
-      </RevealSection>
+      </MRevealSection>
 
-      <RevealSection slide-from="left" :delay="200">
+      <MRevealSection slide-from="left" :delay="200">
         <div class="grid grid-cols-3 gap-4 w-full">
-          <IconCard icon="i-lucide-plane" label="Transfers" description="Airport pickups" />
-          <IconCard icon="i-lucide-utensils" label="Dining" description="In-villa chef" />
-          <IconCard icon="i-lucide-waves" label="Diving" description="Guided dives" />
+          <MIconCard icon="i-lucide-plane" label="Transfers" description="Airport pickups" />
+          <MIconCard icon="i-lucide-utensils" label="Dining" description="In-villa chef" />
+          <MIconCard icon="i-lucide-waves" label="Diving" description="Guided dives" />
         </div>
-      </RevealSection>
+      </MRevealSection>
 
-      <RevealSection slide-from="right" :delay="400">
-        <DateRangePicker v-model="selectedRange" placeholder="Pick a date range" />
-      </RevealSection>
+      <MRevealSection slide-from="right" :delay="400">
+        <MDateRangePicker v-model="selectedRange" placeholder="Pick a date range" />
+      </MRevealSection>
     </main>
 
-    <Footer
+    <MFooter
       brand-name="MY BRAND"
       tagline="A short tagline describing the brand."
       :navigation-items="navigationItems"

@@ -20,13 +20,13 @@ Then just use the components in templates — no import statements needed, Nuxt 
 
 ```vue
 <template>
-  <Header brand-name="My Site" :navigation-items="navItems" cta-label="Contact" cta-to="/contact" />
+  <MHeader brand-name="My Site" :navigation-items="navItems" cta-label="Contact" cta-to="/contact" />
 </template>
 ```
 
 **The consuming project still needs its own dependencies.** This layer's components rely on `@nuxt/ui` and `@nuxt/image` — add them (and any Iconify icon sets you use, e.g. `@iconify-json/lucide`) to the consuming project's own `package.json`. Nuxt layers share code, not `node_modules`.
 
-**Overriding a component**: if a consuming project defines its own component with the same name (e.g. its own `app/components/Header.vue`), that one wins over the layer's version. This is how a project can start from a shared component and fully customize it later without forking the kit.
+**Why the `M` prefix**: every component here is named `M<Something>` (`MHeader`, `MRevealSection`, ...) instead of a plain name. This is deliberate: a consuming project's own `app/components/Header.vue` would otherwise silently override this layer's `Header.vue` (local components always win over layer components with the same name), so a project couldn't have its own custom `Header` *and* use this kit's `Header` side by side. The prefix avoids that collision entirely — a project can freely define its own `Header.vue` while also using `<MHeader>` from the kit, or use `<MHeader>` directly without ever touching a local `Header.vue`.
 
 **Colors**: components use Nuxt UI's semantic color classes (`primary`, `secondary`, `neutral`) rather than hardcoded hex values. Define your own palette per-project via `app.config.ts`:
 
@@ -55,7 +55,7 @@ pnpm typecheck                  # typecheck the layer itself
 
 ## Components
 
-### `Header`
+### `MHeader`
 
 Site header with a responsive mobile menu and an optional "transparent until scrolled" mode (for hero sections).
 
@@ -68,7 +68,7 @@ Site header with a responsive mobile menu and an optional "transparent until scr
 
 Slot: `#logo` (scope: `{ opaque: boolean }`) — replaces the default brand-name text with a custom logo lockup.
 
-### `Footer`
+### `MFooter`
 
 Logo/tagline, nav links, a contact card, and social links — all optional, sections hide themselves when their props are omitted.
 
@@ -82,7 +82,7 @@ Logo/tagline, nav links, a contact card, and social links — all optional, sect
 
 Slot: `#logo` — replaces the default brand-name text with a custom logo lockup.
 
-### `RevealSection`
+### `MRevealSection`
 
 Wraps its slot content and animates it into view (fade + slide) the first time it enters the viewport, via `IntersectionObserver`.
 
@@ -93,7 +93,7 @@ Wraps its slot content and animates it into view (fade + slide) the first time i
 | `align` | `'start' \| 'center' \| 'end'` | `'center'` |
 | `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` |
 
-### `IconCard`
+### `MIconCard`
 
 Generic icon + label + description card, e.g. for a services/features grid.
 
@@ -104,9 +104,9 @@ Generic icon + label + description card, e.g. for a services/features grid.
 | `description` | `string` | `undefined` |
 | `iconSize` | `string` (Tailwind size class) | `'size-10'` |
 
-### `DateRangePicker` + `Calendar`
+### `MDateRangePicker` + `MCalendar`
 
-A popover-based date range picker (built on Nuxt UI's `UCalendar`/`UPopover`), with a clear button once a range is selected. `Calendar` is a thin styling wrapper that `DateRangePicker` uses internally, but it's also exported standalone for single-date use cases.
+A popover-based date range picker (built on Nuxt UI's `UCalendar`/`UPopover`), with a clear button once a range is selected. `MCalendar` is a thin styling wrapper that `MDateRangePicker` uses internally, but it's also exported standalone for single-date use cases.
 
 | Prop | Type |
 |---|---|
@@ -117,6 +117,6 @@ A popover-based date range picker (built on Nuxt UI's `UCalendar`/`UPopover`), w
 
 ## Adding a new shared component
 
-1. Add it to `app/components/` here, following the same rule as everything else in this kit: **no project-specific data**. Content (text, links, images) comes in through props/slots, not hardcoded values.
+1. Add it to `app/components/` here, named `M<Something>.vue`, following the same rule as everything else in this kit: **no project-specific data**. Content (text, links, images) comes in through props/slots, not hardcoded values.
 2. Preview it in `playground/app/pages/index.vue`.
 3. Document its props/slots in this README.
