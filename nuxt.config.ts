@@ -1,17 +1,11 @@
 // This project is a Nuxt Layer: it is not meant to be run standalone as a site.
-// Consuming projects add `extends: ['github:<you>/nuxt-ui-kit']` to their own
-// nuxt.config.ts to inherit these components, composables and base styles.
-// See https://nuxt.com/docs/getting-started/layers
-import { createResolver } from "@nuxt/kit";
-
-const { resolve } = createResolver(import.meta.url);
-
+// Consuming projects install it as a dependency and add `extends: ["nuxt-ui-kit"]`
+// to their own nuxt.config.ts to inherit these components.
+// The layer ships no global CSS and no design tokens: the consuming project owns its
+// Tailwind entry point and its theme, which the components read through Nuxt UI's
+// semantic classes and CSS variables. See https://nuxt.com/docs/getting-started/layers
 export default defineNuxtConfig({
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/image"],
-
-  // Resolved via createResolver, not the `~/` alias: in a layer, `~/` resolves
-  // against the *consuming* project's srcDir, not this layer's own srcDir.
-  css: [resolve("./app/assets/css/main.css")],
+  modules: ["@nuxt/ui"],
 
   compatibilityDate: "2025-01-15",
 });
