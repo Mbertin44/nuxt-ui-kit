@@ -1,25 +1,29 @@
 {
   "name": "nuxt-ui-kit",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
+  "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build",
-    "postinstall": "nuxt prepare",
+    "dev": "nuxt dev playground",
+    "dev:prepare": "nuxt prepare && nuxt prepare playground",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@iconify-json/lucide": "^1.2.82",
-    "@nuxt/image": "^2.0.0",
+    "@internationalized/date": "^3.12.0",
     "@nuxt/ui": "^4.3.0",
     "nuxt": "^4.2.2"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.12.1",
-    "eslint": "^9.39.2",
+    "@iconify-json/lucide": "^1.2.143",
+    "@nuxt/eslint-config": "^1.17.0",
+    "@nuxt/ui": "^4.11.3",
+    "eslint": "^10.12.0",
+    "nuxt": "^4.6.1",
     "typescript": "^5.9.3",
-    "vue-tsc": "^3.2.1"
+    "vue-tsc": "^3.3.13"
   },
-  "packageManager": "pnpm@10.26.1"
+  "packageManager": "pnpm@10.34.6"
 }

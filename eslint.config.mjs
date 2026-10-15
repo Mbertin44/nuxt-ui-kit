@@ -1,3 +1,9 @@
-import withNuxt from "./.nuxt/eslint.config.mjs";
+import { createConfigForNuxt } from "@nuxt/eslint-config/flat";
 
-export default withNuxt();
+// Standalone config: the layer no longer registers the @nuxt/eslint module, so the
+// Nuxt source directories (layer + playground) are declared here.
+export default createConfigForNuxt({
+  dirs: {
+    src: ["./app", "./playground/app"],
+  },
+});
